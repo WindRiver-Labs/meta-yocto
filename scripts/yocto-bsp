@@ -35,6 +35,13 @@ import sys
 import argparse
 import logging
 
+path_from_env = os.getenv('PATH').split(':')
+for script_path in path_from_env:
+    if script_path.endswith('scripts'):
+        if os.path.exists(os.path.join(script_path, 'lib/argparse_oe.py')):
+            sys.path.insert(0, script_path + '/lib')
+            break
+
 scripts_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, scripts_path + '/lib')
 import argparse_oe
